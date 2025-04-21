@@ -3,7 +3,7 @@ import js from '@eslint/js'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import reactPlugin from 'eslint-plugin-react'
-import stylistic from '@stylistic/eslint-plugin'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
   {
@@ -13,8 +13,8 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
-      stylistic.configs.recommended,
     ],
     languageOptions: { globals: globals.browser },
   },
+  eslintPluginPrettierRecommended,
 ])
