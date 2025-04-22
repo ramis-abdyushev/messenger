@@ -2,12 +2,30 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import * as pluginImportX from 'eslint-plugin-import-x';
 import reactPlugin from 'eslint-plugin-react';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default defineConfig([
   js.configs.recommended,
   tseslint.configs.recommended,
+  pluginImportX.flatConfigs.recommended,
+  pluginImportX.flatConfigs.typescript,
+  {
+    rules: {
+      'import-x/no-named-as-default-member': 'off',
+      'import-x/order': 'error',
+      'import-x/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'never',
+          ts: 'never',
+          tsx: 'never',
+        },
+      ],
+    },
+  },
   {
     files: ['src/**/*.{ts,tsx}'],
     extends: [
