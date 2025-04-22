@@ -27,6 +27,10 @@ export default defineConfig([
     },
   },
   {
+    ignores: ['src/**'],
+    languageOptions: { globals: globals.nodeBuiltin },
+  },
+  {
     files: ['src/**/*.{ts,tsx}'],
     extends: [
       reactPlugin.configs.flat.recommended,
