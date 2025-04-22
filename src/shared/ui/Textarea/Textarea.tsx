@@ -1,7 +1,7 @@
 import TextareaAutosize from 'react-textarea-autosize';
 import { ChangeEvent, ComponentPropsWithoutRef, useCallback } from 'react';
-import { classNames } from '../../lib/classNames/classNames';
 import classes from './Textarea.module.scss';
+import { classNames } from 'shared/lib/classNames/classNames';
 
 interface TextareaProps
   extends Omit<ComponentPropsWithoutRef<typeof TextareaAutosize>, 'onChange'> {

@@ -1,5 +1,5 @@
-import { selectMessages } from '../../../../entities/messages/model/messagesSelectors';
 import classes from './MessageWrap.module.scss';
+import { selectMessages } from 'entities/messages/model/messagesSelectors';
 import { useAppSelector } from 'app/store/store';
 
 export function MessageWrap() {

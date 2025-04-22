@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { messagesReducer } from '../../entities/messages/model/messagesSlice';
+import { messagesReducer } from 'entities/messages/model/messagesSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,7 +1,7 @@
 import { KeyboardEvent, useCallback, useState } from 'react';
-import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
-import { addMessage } from '../../../../entities/messages/model/messagesSlice';
 import classes from './MessageInput.module.scss';
+import { Textarea } from 'shared/ui/Textarea/Textarea';
+import { addMessage } from 'entities/messages/model/messagesSlice';
 import { useAppDispatch } from 'app/store/store';
 
 const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(
