@@ -1,6 +1,8 @@
 @media (prefers-color-scheme: dark) {
-  body {
-    color: white;
-    background: #121212;
+  :root {
+    --color-primary: white;
+    --background-color-primary: #17212b;
+    --background-color-secondary: #0e1621;
+    --border-color: #101921;
   }
 }
