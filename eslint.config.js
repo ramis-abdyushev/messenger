@@ -4,6 +4,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import * as pluginImportX from 'eslint-plugin-import-x';
 import reactPlugin from 'eslint-plugin-react';
+import * as reactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default defineConfig([
@@ -35,6 +36,7 @@ export default defineConfig([
     extends: [
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
+      reactHooks.configs['recommended-latest'],
     ],
     languageOptions: { globals: globals.browser },
     settings: {
