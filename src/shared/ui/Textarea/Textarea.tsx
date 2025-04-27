@@ -1,15 +1,20 @@
 import TextareaAutosize from 'react-textarea-autosize';
-import { ChangeEvent, ComponentPropsWithoutRef, useCallback } from 'react';
+import { ChangeEvent, ComponentPropsWithoutRef, memo, useCallback } from 'react';
 import classes from './Textarea.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
+
+enum TextareaVariant {
+  Primary = 'primary',
+}
 
 interface TextareaProps
   extends Omit<ComponentPropsWithoutRef<typeof TextareaAutosize>, 'onChange'> {
   onChange: (value: string) => void;
+  variant?: TextareaVariant;
 }
 
-export function Textarea(props: TextareaProps) {
-  const { onChange } = props;
+export const Textarea = memo(function Textarea(props: TextareaProps) {
+  const { onChange, variant = TextareaVariant.Primary, className } = props;
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +27,7 @@ export function Textarea(props: TextareaProps) {
     <TextareaAutosize
       {...props}
       onChange={handleChange}
-      className={classNames([classes.textarea, props.className])}
+      className={classNames([classes.textarea, classes[variant], className])}
     />
   );
-}
+});

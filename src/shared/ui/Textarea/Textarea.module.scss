@@ -2,6 +2,9 @@
   font: var(--font-m);
   resize: none;
   outline: none;
-  background: var(--background-color-primary);
   border: none;
+}
+
+.primary {
+  background: var(--background-color-primary);
 }

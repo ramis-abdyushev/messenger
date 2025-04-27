@@ -1,34 +1,34 @@
-import { KeyboardEvent, useCallback, useState } from 'react';
+import { KeyboardEvent, memo, useCallback, useState } from 'react';
 import classes from './MessageInput.module.scss';
 import { Textarea } from 'shared/ui/Textarea/Textarea';
 import { addMessage } from 'entities/messages/model/messagesSlice';
 import { useAppDispatch } from 'app/store/store';
+import { Button } from 'shared/ui/Button/Button';
 
-const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(
-  navigator.userAgent,
-);
+const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
 
-export function MessageInput() {
+export const MessageInput = memo(function MessageInput() {
   const [message, setMessage] = useState('');
   const dispatch = useAppDispatch();
 
-  const sendMessage = () => {
+  const sendMessage = useCallback(() => {
     dispatch(addMessage(message));
     setMessage('');
-  };
+  }, [dispatch, message]);
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       if (e.shiftKey || isMobile) {
         return;
       }
+
       e.preventDefault();
       sendMessage();
     }
-  };
+  }, []);
 
-  const handleChange = useCallback((message: string) => {
-    setMessage(message);
+  const handleChange = useCallback((msg: string) => {
+    setMessage(msg);
   }, []);
 
   return (
@@ -41,6 +41,12 @@ export function MessageInput() {
         value={message}
         onChange={handleChange}
       />
+      <Button
+        className={classes.button}
+        text="Отправить"
+        disabled={!message}
+        onClick={sendMessage}
+      />
     </div>
   );
-}
+});
