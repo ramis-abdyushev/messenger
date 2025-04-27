@@ -1,9 +1,10 @@
-import { MessagesPage } from 'pages/messages';
+import { PostsPage } from 'pages/posts';
 
 export default function App() {
   return (
     <>
-      <MessagesPage />
+      {/*<MessagesPage />*/}
+      <PostsPage />
     </>
   );
 }
