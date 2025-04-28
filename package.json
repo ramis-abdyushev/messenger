@@ -15,6 +15,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
+    "react-router": "^7.5.2",
     "react-textarea-autosize": "^8.5.9"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "sass": "^1.87.0",
+    "steiger": "^0.5.6",
     "stylelint": "^16.18.0",
     "stylelint-config-recess-order": "^6.0.0",
     "stylelint-config-standard-scss": "^14.0.0",

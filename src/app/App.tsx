@@ -1,10 +1,11 @@
-import { PostsPage } from 'pages/posts';
+import { Sidebar } from 'widgets/sidebar';
+import { AppRouter } from 'app/router/ui/AppRouter/AppRouter';
 
-export default function App() {
+export function App() {
   return (
     <>
-      {/*<MessagesPage />*/}
-      <PostsPage />
+      <Sidebar />
+      <AppRouter />
     </>
   );
 }
