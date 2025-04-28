@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useGetPostsQuery } from '../../model/slices/PostsSlice';
 import { PostsList } from 'entities/post/ui/PostsList/PostsList';
 
-export const PostsPage = memo(function PostsPage() {
+export default memo(function PostsPage() {
   const { data = [], isLoading, error } = useGetPostsQuery();
 
   if (isLoading) {
