@@ -1,29 +1,32 @@
-import { memo, Suspense } from 'react';
+import { memo, Suspense, useCallback } from 'react';
 import { Route, Routes } from 'react-router';
-import { MessagesPage } from 'pages/messages';
-import { PostsPage } from 'pages/posts';
+import { routeConfig, routeObject } from '../../config/route';
 
 export const AppRouter = memo(function AppRouter() {
-  return (
-    <Routes>
-      <Route
-        index
-        element={
-          // Баг
-          <Suspense key={1} fallback={<div>Загрузка...</div>}>
-            <MessagesPage />
-          </Suspense>
-        }
-      />
-      <Route
-        path="posts"
-        element={
-          // Баг
-          <Suspense key={2} fallback={<div>Загрузка...</div>}>
-            <PostsPage />
-          </Suspense>
-        }
-      />
-    </Routes>
+  const renderRoutes = useCallback(
+    (routes: routeObject[]) =>
+      routes.map((route) => {
+        const { path, Component, children } = route;
+
+        return (
+          <Route
+            key={path}
+            path={path}
+            element={
+              Component ? (
+                // Баг без ключа
+                <Suspense key={path} fallback={<div>Загрузка...</div>}>
+                  <Component />
+                </Suspense>
+              ) : null
+            }
+          >
+            {children ? renderRoutes(children) : null}
+          </Route>
+        );
+      }),
+    [],
   );
+
+  return <Routes>{renderRoutes(routeConfig)}</Routes>;
 });
