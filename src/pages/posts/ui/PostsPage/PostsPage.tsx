@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { useGetPostsQuery } from '../../model/slices/postsSlice';
-import { PostsList } from 'entities/post';
+import { PostsList, useGetPostsQuery } from 'entities/post';
 
 export default memo(function PostsPage() {
   const { data = [], isLoading, error } = useGetPostsQuery();

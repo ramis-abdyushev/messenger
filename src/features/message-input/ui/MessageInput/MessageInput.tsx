@@ -1,4 +1,4 @@
-import { KeyboardEvent, memo, useCallback, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, memo, useCallback, useState } from 'react';
 import classes from './MessageInput.module.scss';
 import { Textarea } from 'shared/ui/Textarea/Textarea';
 import { addMessage } from 'entities/messages/model/messagesSlice';
@@ -27,8 +27,8 @@ export const MessageInput = memo(function MessageInput() {
     }
   }, []);
 
-  const handleChange = useCallback((msg: string) => {
-    setMessage(msg);
+  const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
   }, []);
 
   return (
