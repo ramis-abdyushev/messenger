@@ -1,4 +1,5 @@
 export enum RoutePaths {
-  Messages = '',
+  Products = 'products',
+  Messages = 'messages',
   Posts = 'posts',
 }

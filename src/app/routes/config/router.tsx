@@ -3,6 +3,7 @@ import { MessagesPage } from 'pages/messages';
 import { PostsPage } from 'pages/posts';
 import { PostDetailPage } from 'pages/post-detail';
 import { RoutePaths } from 'shared/routes';
+import { ProductsPage } from 'pages/products';
 
 export interface RouteConfig {
   path: string;
@@ -11,6 +12,10 @@ export interface RouteConfig {
 }
 
 export const routerConfig: RouteConfig[] = [
+  {
+    path: RoutePaths.Products,
+    Component: ProductsPage,
+  },
   {
     path: RoutePaths.Messages,
     Component: MessagesPage,

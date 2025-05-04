@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router';
-import classes from './sidebar.module.scss';
+import classes from './navbar.module.scss';
 import { RoutePaths } from 'shared/routes';
 
-export const Sidebar = memo(function Sidebar() {
+export const Navbar = memo(function Navbar() {
   return (
-    <div className={classes.sidebar}>
+    <nav className={classes.navbar}>
+      <NavLink to={RoutePaths.Products}>Товары</NavLink>
       <NavLink to={RoutePaths.Messages}>Сообщения</NavLink>
       <NavLink to={RoutePaths.Posts}>Посты</NavLink>
-    </div>
+    </nav>
   );
 });

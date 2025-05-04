@@ -1,0 +1,11 @@
+.navbar {
+  > a {
+    margin-right: 20px;
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

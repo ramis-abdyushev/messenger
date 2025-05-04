@@ -1,0 +1,19 @@
+.productsListItem {
+  margin: 15px;
+  background-color: var(--background-color-secondary);
+  border-radius: 10px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  padding: 20px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
