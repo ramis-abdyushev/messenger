@@ -1,3 +1,5 @@
+import { EntityState } from '@reduxjs/toolkit';
+
 export interface Product {
   id: number;
   title: string;
@@ -36,6 +38,25 @@ export interface Product {
   };
   images: string[];
   thumbnail: string;
+}
+
+export interface GetProductsQueryArg {
+  pageLimit: number;
+  currentPage: number;
+}
+
+export interface GetProductsRes {
+  products: Product[];
+  limit: number;
+  skip: number;
+  total: number;
+}
+
+export type ProductsEntityState = EntityState<Product, Product['id']>;
+
+export interface GetProductsCache {
+  products: ProductsEntityState;
+  total: GetProductsRes['total'];
 }
 
 export type ProductMutableData = Partial<Omit<Product, 'id'>>;

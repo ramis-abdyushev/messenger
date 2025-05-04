@@ -1,18 +1,30 @@
-import { EditProductQueryArg, Product } from './product-api.types';
+import { createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  EditProductQueryArg,
+  GetProductsCache,
+  GetProductsQueryArg,
+  GetProductsRes,
+  Product,
+} from './product-api.types';
 import { apiSlice } from 'shared/api';
 
-interface ProductsRes {
-  products: Product[];
-  limit: number;
-  skip: number;
-  total: number;
-}
+const productsAdapter = createEntityAdapter<Product>();
+const initialState = productsAdapter.getInitialState();
 
 const apiSliceWithProducts = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getProducts: build.query<Product[], void>({
-      query: () => '/products',
-      transformResponse: (res: ProductsRes) => res.products,
+    getProducts: build.query<GetProductsCache, GetProductsQueryArg>({
+      query: ({ pageLimit, currentPage }) => ({
+        url: '/products',
+        params: {
+          limit: pageLimit,
+          skip: pageLimit * (currentPage - 1),
+        },
+      }),
+      transformResponse: (res: GetProductsRes) => ({
+        products: productsAdapter.setAll(initialState, res.products),
+        total: res.total,
+      }),
     }),
     getProduct: build.query<Product, number>({
       query: (id) => `/products/${id}`,

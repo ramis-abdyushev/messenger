@@ -7,7 +7,7 @@ enum ButtonVariant {
 }
 
 interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  text: string;
+  text: string | number;
   variant?: ButtonVariant;
 }
 
