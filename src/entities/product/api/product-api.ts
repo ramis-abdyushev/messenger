@@ -3,6 +3,7 @@ import {
   EditProductQueryArg,
   GetProductsCache,
   GetProductsQueryArg,
+  GetProductsQueryParams,
   GetProductsRes,
   Product,
 } from './product-api.types';
@@ -14,13 +15,26 @@ const initialState = productsAdapter.getInitialState();
 const apiSliceWithProducts = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query<GetProductsCache, GetProductsQueryArg>({
-      query: ({ pageLimit, currentPage }) => ({
-        url: '/products',
-        params: {
+      query: ({ pageLimit, currentPage, searchQuery }) => {
+        let url = '/products';
+
+        const params: GetProductsQueryParams = {
           limit: pageLimit,
           skip: pageLimit * (currentPage - 1),
-        },
-      }),
+        };
+
+        searchQuery = searchQuery.trim();
+
+        if (searchQuery) {
+          url += '/search';
+          params.q = searchQuery;
+        }
+
+        return {
+          url,
+          params,
+        };
+      },
       transformResponse: (res: GetProductsRes) => ({
         products: productsAdapter.setAll(initialState, res.products),
         total: res.total,

@@ -2,7 +2,7 @@ import { memo, useCallback } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import classes from './post-form.module.scss';
 import { Post, PostMutableData, useEditPostMutation } from 'entities/post';
-import { Button, Input, Textarea } from 'shared/ui';
+import { Button, Textarea } from 'shared/ui';
 
 type PostFormData = PostMutableData;
 
@@ -37,7 +37,7 @@ export const PostForm = memo(function PostForm(props: PostFormProps) {
 
   return (
     <form className={classes.postForm} onSubmit={handleSubmit(onSubmit)}>
-      <Input {...register('title')} />
+      {/*<Input {...register('title')} />*/}
       <Textarea {...register('body')} />
       <Button text="Отправить" />
     </form>

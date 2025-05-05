@@ -43,6 +43,13 @@ export interface Product {
 export interface GetProductsQueryArg {
   pageLimit: number;
   currentPage: number;
+  searchQuery: string;
+}
+
+export interface GetProductsQueryParams {
+  limit: number;
+  skip: number;
+  q?: string;
 }
 
 export interface GetProductsRes {

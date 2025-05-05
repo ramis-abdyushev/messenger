@@ -1,0 +1,14 @@
+.searchInput {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+
+  &[disabled] {
+    cursor: default;
+  }
+}
+
+.primary {
+  background-color: #91b7da;
+}

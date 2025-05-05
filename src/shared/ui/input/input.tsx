@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, memo } from 'react';
+import { ChangeEventHandler, ComponentPropsWithoutRef, memo, useCallback } from 'react';
 import classes from './input.module.scss';
 import { classNames } from 'shared/lib';
 
@@ -6,12 +6,26 @@ enum InputVariant {
   Primary = 'primary',
 }
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
+interface InputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'onChange'> {
+  onChange: (value: string) => void;
   variant?: InputVariant;
 }
 
 export const Input = memo(function Input(props: InputProps) {
-  const { variant = InputVariant.Primary, className } = props;
+  const { onChange, variant = InputVariant.Primary, className } = props;
 
-  return <input {...props} className={classNames([classes.input, classes[variant], className])} />;
+  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    (e) => {
+      onChange(e.target.value);
+    },
+    [onChange],
+  );
+
+  return (
+    <input
+      {...props}
+      onChange={handleChange}
+      className={classNames([classes.input, classes[variant], className])}
+    />
+  );
 });
