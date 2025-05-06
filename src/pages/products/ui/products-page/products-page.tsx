@@ -10,7 +10,7 @@ const pageLimitOptions: SelectOption[] = [
 ];
 
 export default memo(function ProductsPage() {
-  const [pageLimit, setPageLimit] = useState(20);
+  const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -51,7 +51,7 @@ export default memo(function ProductsPage() {
       <div>
         <SearchInput onChange={search} />
         <Select options={pageLimitOptions} value={pageLimit} onChange={changePageLimit} />
-        <Pagination count={maxPageNumber} currentPage={currentPage} onChange={setCurrentPage} />
+        <Pagination count={maxPageNumber} page={currentPage} onChange={setCurrentPage} />
         <div>pageLimit: {pageLimit}</div>
         <div>currentPage: {currentPage}</div>
         <div>maxPageNumber {maxPageNumber}</div>

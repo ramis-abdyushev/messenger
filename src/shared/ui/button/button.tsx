@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, memo } from 'react';
+import { ComponentPropsWithoutRef, memo, useCallback } from 'react';
 import classes from './button.module.scss';
 import { classNames } from 'shared/lib';
 
@@ -6,17 +6,24 @@ enum ButtonVariant {
   Primary = 'primary',
 }
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  text: string | number;
+interface ButtonProps<T> extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
+  onClick?: (value: T) => void;
+  eventValue?: T;
   variant?: ButtonVariant;
 }
 
-export const Button = memo(function Button(props: ButtonProps) {
-  const { text, variant = ButtonVariant.Primary, className } = props;
+function ButtonComponent<T = undefined>(props: ButtonProps<T>) {
+  const { onClick, eventValue, variant = ButtonVariant.Primary, className, ...otherProps } = props;
+
+  const handleClick = useCallback(() => onClick?.(eventValue as T), [onClick, eventValue]);
 
   return (
-    <button {...props} className={classNames([classes.button, classes[variant], className])}>
-      {text}
-    </button>
+    <button
+      {...otherProps}
+      onClick={handleClick}
+      className={classNames([classes.button, classes[variant], className])}
+    />
   );
-});
+}
+
+export const Button = memo(ButtonComponent) as typeof ButtonComponent;

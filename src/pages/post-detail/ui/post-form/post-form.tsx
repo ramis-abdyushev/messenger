@@ -39,7 +39,7 @@ export const PostForm = memo(function PostForm(props: PostFormProps) {
     <form className={classes.postForm} onSubmit={handleSubmit(onSubmit)}>
       {/*<Input {...register('title')} />*/}
       <Textarea {...register('body')} />
-      <Button text="Отправить" />
+      <Button>Отправить</Button>
     </form>
   );
 });

@@ -40,12 +40,9 @@ export const MessageInput = memo(function MessageInput() {
         value={message}
         onChange={handleChange}
       />
-      <Button
-        className={classes.button}
-        text="Отправить"
-        disabled={!message}
-        onClick={sendMessage}
-      />
+      <Button className={classes.button} disabled={!message} onClick={sendMessage}>
+        Отправить
+      </Button>
     </div>
   );
 });
