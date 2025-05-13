@@ -1,0 +1,4 @@
+{
+  "extends": ["@tsconfig/node22/tsconfig.json", "@tsconfig/node-ts/tsconfig.json"],
+  "include": ["vite.config.ts", "eslint.config.ts", "stylelint.config.ts"]
+}

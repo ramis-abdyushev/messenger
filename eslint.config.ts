@@ -1,4 +1,4 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { globalIgnores } from 'eslint/config';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -7,7 +7,7 @@ import reactPlugin from 'eslint-plugin-react';
 import * as reactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
-export default defineConfig([
+export default tseslint.config(
   js.configs.recommended,
   tseslint.configs.recommended,
   pluginImportX.flatConfigs.recommended,
@@ -47,4 +47,4 @@ export default defineConfig([
   },
   eslintPluginPrettierRecommended,
   globalIgnores(['.idea/', 'dist/']),
-]);
+);
