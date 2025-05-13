@@ -1,7 +1,11 @@
 import type { Config } from 'stylelint';
 
 const config: Config = {
-  extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order', 'stylelint-prettier/recommended'],
+  extends: [
+    'stylelint-config-standard-scss',
+    'stylelint-config-recess-order',
+    'stylelint-prettier/recommended',
+  ],
   rules: {
     'selector-class-pattern': null,
   },
