@@ -1,4 +1,5 @@
 import './styles/index.scss';
+import '@fontsource/roboto/400.css';
 import { AppRouter } from 'app/routes';
 import { AppProvider } from 'app/providers';
 import { Layout } from 'app/layout';

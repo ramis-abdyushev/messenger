@@ -7,12 +7,16 @@
 }
 
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
+  border: none;
 }
 
 .app {
-  font: var(--font-m);
+  font-family: var(--font-family);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
   color: var(--color-primary);
   background: var(--background-color-primary);
 }
