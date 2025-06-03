@@ -1,5 +1,6 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { ProductsList } from '../products-list/products-list';
+import { ProductsListSkeleton } from '../products-list/products-list-skeleton';
 import { useGetProductsQuery } from 'entities/product';
 import { Pagination, SearchInput, Select, SelectOption } from 'shared/ui';
 
@@ -14,7 +15,7 @@ export default memo(function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data, isLoading, error } = useGetProductsQuery({
+  const { data, isFetching, error } = useGetProductsQuery({
     pageLimit,
     currentPage,
     searchQuery,
@@ -34,30 +35,31 @@ export default memo(function ProductsPage() {
     setCurrentPage(1);
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Ошибка1!: {JSON.stringify(error)}</div>;
-  }
-
-  if (!data?.total) {
-    return <div>Нет данных</div>;
-  }
-
   return (
     <div>
       <div>
         <SearchInput onChange={search} />
         <Select options={pageLimitOptions} value={pageLimit} onChange={changePageLimit} />
-        <Pagination count={maxPageNumber} page={currentPage} onChange={setCurrentPage} />
-        <div>pageLimit: {pageLimit}</div>
-        <div>currentPage: {currentPage}</div>
-        <div>maxPageNumber {maxPageNumber}</div>
-        <div>data.total {data.total}</div>
       </div>
-      <ProductsList products={data.products} />
+      <div>
+        {error ? (
+          <div>Ошибка: {JSON.stringify(error)}</div>
+        ) : !data?.total && !isFetching ? (
+          <div>Нет данных</div>
+        ) : (
+          <div>
+            {!!maxPageNumber && (
+              <Pagination count={maxPageNumber} page={currentPage} onChange={setCurrentPage} />
+            )}
+            {isFetching ? (
+              <ProductsListSkeleton limit={pageLimit} />
+            ) : (
+              data?.products && <ProductsList products={data.products} />
+            )}
+          </div>
+        )}
+      </div>
+      <div></div>
     </div>
   );
 });

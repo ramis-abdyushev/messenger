@@ -1,5 +1,8 @@
 .productsListItem {
+  width: 300px;
+  height: 400px;
   margin: 15px;
+  cursor: pointer;
   background-color: var(--background-color-secondary);
   border-radius: 10px;
 
@@ -11,9 +14,33 @@
 .link {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 400px;
   padding: 20px;
   color: var(--color-primary);
   text-decoration: none;
+}
+
+.skeleton {
+  cursor: default;
+  background: linear-gradient(
+    90deg,
+    var(--background-color-secondary) 25%,
+    var(--background-color-primary) 50%,
+    var(--background-color-secondary) 75%
+  );
+  background-size: 200%;
+  animation: shimmer 1s infinite linear;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
