@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, memo, useCallback } from 'react';
+import { ComponentPropsWithoutRef, memo, MouseEventHandler, useCallback } from 'react';
 import classes from './button.module.scss';
 import { classNames } from 'shared/lib';
 
@@ -15,7 +15,13 @@ interface ButtonProps<T> extends Omit<ComponentPropsWithoutRef<'button'>, 'onCli
 function ButtonComponent<T = undefined>(props: ButtonProps<T>) {
   const { onClick, eventValue, variant = ButtonVariant.Primary, className, ...otherProps } = props;
 
-  const handleClick = useCallback(() => onClick?.(eventValue as T), [onClick, eventValue]);
+  const handleClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    (e) => {
+      e.stopPropagation();
+      onClick?.(eventValue as T);
+    },
+    [onClick, eventValue],
+  );
 
   return (
     <button

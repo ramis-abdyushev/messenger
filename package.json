@@ -1,5 +1,5 @@
 {
-  "name": "messenger",
+  "name": "store",
   "type": "module",
   "engines": {
     "node": "22.13.1"

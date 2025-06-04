@@ -6,7 +6,10 @@ import { RoutePaths } from 'shared/routes';
 export const Navbar = memo(function Navbar() {
   return (
     <nav className={classes.navbar}>
-      <NavLink to={RoutePaths.Products}>Товары</NavLink>
+      {/* TODO: Вынести в отдельный компонент */}
+      <NavLink className={({ isActive }) => (isActive ? classes.active : '')} to={RoutePaths.Main}>
+        Товары
+      </NavLink>
       <NavLink to={RoutePaths.Messages}>Сообщения</NavLink>
       <NavLink to={RoutePaths.Posts}>Посты</NavLink>
     </nav>

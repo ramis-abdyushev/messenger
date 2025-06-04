@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, SetStateAction, useCallback, useMemo, useState } from 'react';
 import { ProductsList } from '../products-list/products-list';
 import { ProductsListSkeleton } from '../products-list/products-list-skeleton';
 import { useGetProductsQuery } from 'entities/product';
@@ -11,7 +11,7 @@ const pageLimitOptions: SelectOption[] = [
 ];
 
 export default memo(function ProductsPage() {
-  const [pageLimit, setPageLimit] = useState(10);
+  const [pageLimit, setPageLimit] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -25,14 +25,20 @@ export default memo(function ProductsPage() {
     return data?.total ? Math.ceil(data.total / pageLimit) : 0;
   }, [data?.total, pageLimit]);
 
+  const setPage = useCallback((action: SetStateAction<number>) => {
+    setCurrentPage(action);
+    console.log(123);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   const search = useCallback((query: string) => {
     setSearchQuery(query);
-    setCurrentPage(1);
+    setPage(1);
   }, []);
 
   const changePageLimit = useCallback((newLimit: string) => {
     setPageLimit(+newLimit);
-    setCurrentPage(1);
+    setPage(1);
   }, []);
 
   return (
@@ -48,13 +54,13 @@ export default memo(function ProductsPage() {
           <div>Нет данных</div>
         ) : (
           <div>
-            {!!maxPageNumber && (
-              <Pagination count={maxPageNumber} page={currentPage} onChange={setCurrentPage} />
-            )}
             {isFetching ? (
               <ProductsListSkeleton limit={pageLimit} />
             ) : (
               data?.products && <ProductsList products={data.products} />
+            )}
+            {!!maxPageNumber && (
+              <Pagination count={maxPageNumber} page={currentPage} onChange={setPage} />
             )}
           </div>
         )}

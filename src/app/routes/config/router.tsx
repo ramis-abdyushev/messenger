@@ -14,17 +14,12 @@ export interface RouteConfig {
 
 export const routerConfig: RouteConfig[] = [
   {
-    path: RoutePaths.Products,
-    children: [
-      {
-        path: '',
-        Component: ProductsPage,
-      },
-      {
-        path: ':id',
-        Component: ProductDetailPage,
-      },
-    ],
+    path: RoutePaths.Main,
+    Component: ProductsPage,
+  },
+  {
+    path: RoutePaths.Products + '/:id',
+    Component: ProductDetailPage,
   },
   {
     path: RoutePaths.Messages,
