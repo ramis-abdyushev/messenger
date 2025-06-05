@@ -76,21 +76,28 @@ export const Pagination = memo(function Pagination(props: PaginationProps) {
 
   return (
     <div className={classNames([classes.pagination, className])}>
-      <Button onClick={goPrevPage} disabled={page === 1}>
+      <Button className={classes.arrow} onClick={goPrevPage} disabled={page === 1}>
         Назад
       </Button>
       <div>
         {pageNumbers.map((pageNumber, index) =>
           pageNumber !== ellipsis ? (
-            <Button<number> key={pageNumber} eventValue={pageNumber} onClick={goPage}>
-              {pageNumber === page ? `Тута ${pageNumber}` : pageNumber}
+            <Button<number>
+              className={pageNumber === page ? classes.active : ''}
+              key={pageNumber}
+              eventValue={pageNumber}
+              onClick={goPage}
+            >
+              {pageNumber}
             </Button>
           ) : (
-            <span key={pageNumber + index}>...</span>
+            <span className={classes.ellipsis} key={pageNumber + index}>
+              ...
+            </span>
           ),
         )}
       </div>
-      <Button onClick={goNextPage} disabled={page === count}>
+      <Button className={classes.arrow} onClick={goNextPage} disabled={page === count}>
         Вперёд
       </Button>
     </div>
