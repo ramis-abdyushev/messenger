@@ -1,17 +1,14 @@
 import { memo } from 'react';
-import { NavLink } from 'react-router';
+import { AppNavLink } from '../app-nav-link/app-nav-link';
 import classes from './navbar.module.scss';
 import { RoutePaths } from 'shared/routes';
 
 export const Navbar = memo(function Navbar() {
   return (
     <nav className={classes.navbar}>
-      {/* TODO: Вынести в отдельный компонент */}
-      <NavLink className={({ isActive }) => (isActive ? classes.active : '')} to={RoutePaths.Main}>
-        Товары
-      </NavLink>
-      <NavLink to={RoutePaths.Messages}>Сообщения</NavLink>
-      <NavLink to={RoutePaths.Posts}>Посты</NavLink>
+      <AppNavLink to={RoutePaths.Main}>Товары</AppNavLink>
+      <AppNavLink to={RoutePaths.Messages}>Сообщения</AppNavLink>
+      <AppNavLink to={RoutePaths.Posts}>Посты</AppNavLink>
     </nav>
   );
 });
