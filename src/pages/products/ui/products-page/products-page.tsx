@@ -1,4 +1,4 @@
-import { memo, SetStateAction, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { ProductsList } from '../products-list/products-list';
 import { ProductsListSkeleton } from '../products-list/products-list-skeleton';
 import { useGetProductsQuery } from 'entities/product';
@@ -25,10 +25,9 @@ export default memo(function ProductsPage() {
     return data?.total ? Math.ceil(data.total / pageLimit) : 0;
   }, [data?.total, pageLimit]);
 
-  const setPage = useCallback((action: SetStateAction<number>) => {
-    setCurrentPage(action);
-    console.log(123);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const setPage = useCallback((page: number) => {
+    setCurrentPage(page);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }, []);
 
   const search = useCallback((query: string) => {

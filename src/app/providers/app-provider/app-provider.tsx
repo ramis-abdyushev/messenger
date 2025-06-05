@@ -1,4 +1,5 @@
 import { ReactNode, StrictMode } from 'react';
+import { ThemeProvider } from '../theme-provider/theme-provider';
 import { StoreProvider } from 'app/store';
 import { RouterProvider } from 'app/routes';
 
@@ -12,7 +13,9 @@ export function AppProvider(props: AppProviderProps) {
   return (
     <StrictMode>
       <RouterProvider>
-        <StoreProvider>{children}</StoreProvider>
+        <ThemeProvider>
+          <StoreProvider>{children}</StoreProvider>
+        </ThemeProvider>
       </RouterProvider>
     </StrictMode>
   );
