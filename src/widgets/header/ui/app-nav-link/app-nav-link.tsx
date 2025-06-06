@@ -1,19 +1,18 @@
-import { ComponentPropsWithoutRef, memo } from 'react';
-import { NavLink } from 'react-router';
+import { memo, ReactNode } from 'react';
+import { NavLink, NavLinkProps } from 'react-router';
 import classes from './app-nav-link.module.scss';
-import { classNames } from 'shared/lib';
+import { Button } from 'shared/ui';
 
-type AppNavLinkProps = Omit<ComponentPropsWithoutRef<typeof NavLink>, 'className'>;
+interface AppNavLinkProps extends Pick<NavLinkProps, 'to'> {
+  children: ReactNode;
+}
 
 export const AppNavLink = memo(function AppNavLink(props: AppNavLinkProps) {
-  const { children, ...otherProps } = props;
+  const { children, to } = props;
 
   return (
-    <NavLink
-      {...otherProps}
-      className={({ isActive }) => classNames([classes.appNavLink, isActive ? classes.active : ''])}
-    >
+    <Button className={classes.appNavLink} component={NavLink} to={to}>
       {children}
-    </NavLink>
+    </Button>
   );
 });

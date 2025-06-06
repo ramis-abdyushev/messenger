@@ -1,33 +1,25 @@
-import { ComponentPropsWithoutRef, memo, MouseEventHandler, useCallback } from 'react';
+import { ElementType, memo, useCallback } from 'react';
+import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/material';
 import classes from './button.module.scss';
 import { classNames } from 'shared/lib';
 
-enum ButtonVariant {
-  Primary = 'primary',
-}
-
-interface ButtonProps<T> extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
-  onClick?: (value: T) => void;
+type ButtonProps<C extends ElementType, T> = MuiButtonProps<C> & {
+  onClick?: (value: T | undefined) => void;
   eventValue?: T;
-  variant?: ButtonVariant;
-}
+};
 
-function ButtonComponent<T = undefined>(props: ButtonProps<T>) {
-  const { onClick, eventValue, variant = ButtonVariant.Primary, className, ...otherProps } = props;
+function ButtonComponent<C extends ElementType, T>(props: ButtonProps<C, T>) {
+  const { onClick, eventValue, className, ...otherProps } = props;
 
-  const handleClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
-    (e) => {
-      e.stopPropagation();
-      onClick?.(eventValue as T);
-    },
-    [onClick, eventValue],
-  );
+  const handleClick = useCallback(() => {
+    onClick?.(eventValue);
+  }, [onClick, eventValue]);
 
   return (
-    <button
+    <MuiButton
       {...otherProps}
       onClick={handleClick}
-      className={classNames([classes.button, classes[variant], className])}
+      className={classNames([classes.button, className])}
     />
   );
 }
