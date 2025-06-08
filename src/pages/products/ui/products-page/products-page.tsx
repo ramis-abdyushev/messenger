@@ -2,9 +2,9 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { ProductsList } from '../products-list/products-list';
 import { ProductsListSkeleton } from '../products-list/products-list-skeleton';
 import { useGetProductsQuery } from 'entities/product';
-import { Pagination, SearchInput, Select, SelectOption } from 'shared/ui';
+import { MenuItem, Pagination, SearchField, TextField } from 'shared/ui';
 
-const pageLimitOptions: SelectOption[] = [
+const pageLimitOptions = [
   { value: 10, label: '10' },
   { value: 20, label: '20' },
   { value: 30, label: '30' },
@@ -43,8 +43,14 @@ export default memo(function ProductsPage() {
   return (
     <div>
       <div>
-        <SearchInput onChange={search} />
-        <Select options={pageLimitOptions} value={pageLimit} onChange={changePageLimit} />
+        <SearchField onChange={search} />
+        <TextField select value={pageLimit} onChange={changePageLimit}>
+          {pageLimitOptions.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
       </div>
       <div>
         {error ? (

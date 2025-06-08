@@ -85,7 +85,7 @@ export const PaginationDeprecated = memo(function Pagination(props: PaginationPr
       <div>
         {pageNumbers.map((pageNumber, index) =>
           pageNumber !== ellipsis ? (
-            <Button<number>
+            <Button
               className={pageNumber === page ? classes.active : ''}
               key={pageNumber}
               eventValue={pageNumber}

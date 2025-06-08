@@ -1,15 +1,15 @@
 import { memo, useEffect, useState } from 'react';
-import { Input } from '../input/input';
-import classes from './search-input.module.scss';
+import { TextField } from '../text-field/text-field';
+import classes from './search-field.module.scss';
 import { classNames, useDebounce } from 'shared/lib';
 
-interface SearchInputProps {
+interface SearchFieldProps {
   onChange: (value: string) => void;
   initialValue?: string;
   className?: string;
 }
 
-export const SearchInput = memo(function SearchInput(props: SearchInputProps) {
+export const SearchField = memo(function SearchField(props: SearchFieldProps) {
   const { onChange, initialValue = '', className } = props;
 
   const [query, setQuery] = useState(initialValue);
@@ -21,7 +21,7 @@ export const SearchInput = memo(function SearchInput(props: SearchInputProps) {
   }, [debouncedQuery, onChange]);
 
   return (
-    <Input
+    <TextField
       className={classNames([classes.searchInput, className])}
       value={query}
       onChange={setQuery}
