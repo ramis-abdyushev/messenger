@@ -5,6 +5,15 @@ const theme = createTheme({
   colorSchemes: {
     dark: true,
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
+  },
 });
 
 interface ThemeProviderProps {

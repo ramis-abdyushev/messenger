@@ -1,6 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { ProductsList } from '../products-list/products-list';
 import { ProductsListSkeleton } from '../products-list/products-list-skeleton';
+import classes from './products-page.module.scss';
 import { useGetProductsQuery } from 'entities/product';
 import { MenuItem, Pagination, SearchField, TextField } from 'shared/ui';
 
@@ -41,7 +42,7 @@ export default memo(function ProductsPage() {
   }, []);
 
   return (
-    <div>
+    <div className={classes.productsPage}>
       <div>
         <SearchField onChange={search} />
         <TextField select value={pageLimit} onChange={changePageLimit}>
@@ -65,7 +66,12 @@ export default memo(function ProductsPage() {
               data?.products && <ProductsList products={data.products} />
             )}
             {!!maxPageNumber && (
-              <Pagination count={maxPageNumber} page={currentPage} onChange={setPage} />
+              <Pagination
+                count={maxPageNumber}
+                page={currentPage}
+                onChange={setPage}
+                size="large"
+              />
             )}
           </div>
         )}

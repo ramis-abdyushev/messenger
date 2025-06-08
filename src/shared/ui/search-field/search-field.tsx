@@ -22,6 +22,7 @@ export const SearchField = memo(function SearchField(props: SearchFieldProps) {
 
   return (
     <TextField
+      placeholder="Поиск"
       className={classNames([classes.searchInput, className])}
       value={query}
       onChange={setQuery}
